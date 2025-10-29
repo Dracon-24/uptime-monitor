@@ -1,0 +1,26 @@
+---
+- name: Deploy uptime webapp locally
+  hosts: local
+  become: yes
+
+  tasks:
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Stop and remove old container (if any)
+      command: docker rm -f uptime-webapp
+      ignore_errors: yes
+
+    - name: Pull latest image from Docker Hub
+      command: docker pull dracon24/uptime-webapp:latest
+
+    - name: Run the container
+      command: >
+        docker run -d
+        --name uptime-webapp
+        -p 8085:3000
+        dracon24/uptime-webapp:latest
+
