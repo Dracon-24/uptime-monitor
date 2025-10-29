@@ -43,19 +43,6 @@ services:
     volumes:
       - redis-data:/data
 
-  # # Your Node.js web app
-  # webapp:
-  #   build: .
-  #   container_name: uptime-webapp
-  #   restart: unless-stopped
-  #   ports:
-  #     - "8085:3000"
-  #   depends_on:
-  #     - redis
-  #     - graphite
-  #   environment:
-  #     - NODE_ENV=production
-
 volumes:
   graphite-data:
   grafana-data:
